@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-bold">Task Form</h1>
+        <form action="{% url 'tasks:task_create' %}" method="post" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2">Add task</button>
+        <input type="hidden" name="next" value="{% url 'tasks:task_list' %}" />    
+        </form>
+    </div>
+                <!-- Modal for task form -->
+			<div id="task-modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+				<div class="bg-white p-4 rounded-lg">
+					<form action="{% url 'tasks:task_create' %}" method="post" role="form" enctype="multipart/form-data">
+						{% csrf_token %}
+						<label>Title</label>
+            <input type="text" name="title" class="w-full border p-2 mb-2">
+            <label>Description</label>
+            <textarea name="description" class="w-full border p-2 mb-2"></textarea>
+            <label>Status</label>
+            <select name="status" class="w-full border p-2 mb-2">
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="overdue">Overdue</option>
+            </select>
+            <label>Priority</label>
+            <select name="priority" class="w-full border p-2 mb-2">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <label>Due Date</label>
+            <input type="datetime-local" name="due_date" class="w-full border p-2 mb-2">
+            <label>Category</label>
+            <input type="text" name="category" class="w-full border p-2 mb-2">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2">Save</button>
+					<input type="hidden" name="next" value="{% url 'tasks:task_list' %}" />    
+					</form>
+				</div>
+			</div>
+</body>
+</html>
+
+

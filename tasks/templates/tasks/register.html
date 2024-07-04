@@ -1,0 +1,9 @@
+
+<form method="post" action="{% url 'tasks:register' %}">
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+	<button name="submit">register</button>
+<input type="hidden" name="next" value="{% url 'tasks:task_list' %}" />
+</form>
+ 
